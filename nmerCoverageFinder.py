@@ -1,7 +1,7 @@
 __author__ = 'mitch'
 
 
-import sys, string
+import sys, string, gzip
 
 
 transtab = string.maketrans('atcgATCG', 'tagcTAGC')
@@ -57,7 +57,6 @@ def getnmers(reads, prefix):
     else:
         readfile = open(reads)
     getseq = False
-    getqual = False
     getfaseq = False
     for line in readfile:
         if line.startswith('@'):
@@ -124,7 +123,7 @@ except:
 USE: Find the median nmer coverage of contigs
 USAGE: python nmerCoverageFinder.py contigfile.fa readfile.fa output_prefix nmer_size
 outputs nmer counts to output_prefix_nmer and coverage csv to output_prefix_coverage.csv'''
-nmercut = 2
+nmercut = 0
 getnmers(sys.argv[2], sys.argv[3])
 readnmerfile(sys.argv[3])
 contigfile = open(sys.argv[1])
